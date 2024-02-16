@@ -15,13 +15,19 @@ const UsuarioSchema = Schema ({
     },
     role:{
         type: String,
-        required: true,
-        enum: ["TEACHER_ROLE", "STUDENT_ROLE"]
+        enum: ["TEACHER_ROLE", "STUDENT_ROLE"],
+        default: "STUDENT_ROLE"
     },
     estado:{
         type: Boolean,
         default: true
     }
 });
+
+UsuarioSchema.methods.toJSON = function(){
+    const {_v, password, _id, ...usuario} = this.toObject();
+    usuario.uid = _id;
+    return usuario;
+}
 
 module.exports = model('Usuario', UsuarioSchema);

@@ -30,7 +30,7 @@ const getUsuarioByid = async (req, res) => {
 
 const usuariosPut = async (req, res) => {
     const { id } = req.params;
-    const { _id, ...resto } = req.body;
+    const { _id, role, ...resto } = req.body;
 
     await Usuario.findByIdAndUpdate(id, resto);
 
@@ -47,10 +47,12 @@ const usuariosDelete = async (req, res) => {
     await Usuario.findByIdAndUpdate(id,{estado: false});
     
     const usuario = await Usuario.findOne({ _id: id });
+    const usuarioAutenticado = req.usuario;
 
     res.status(200).json({
-        msg: "Usuario eliminado correctamente",
-        usuario
+        msg: "Usuario a eliminar",
+        usuario,
+        usuarioAutenticado
     });
 }
 
