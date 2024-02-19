@@ -17,10 +17,8 @@ const AlumnoSchema = Schema({
         type: String,
         require: [true, 'El password es obligatoria']
     },
-    cursos: {
-        type: String,
-        require: [true, 'El curso es obligatorio']
-    },
+    cursos: 
+        [{ type: Schema.Types.ObjectId, ref: 'Curso' }],
     role: {
         type: String,
         default: "STUDENT_ROLE"

@@ -46,8 +46,6 @@ router.post(
         validarCampos,
     ], alumnosPost);
 
-
-
 module.exports = router;
 
 
